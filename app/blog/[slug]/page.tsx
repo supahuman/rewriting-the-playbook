@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default async function PostPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const { data: post, error } = await supabaseServer
     .from('posts')
