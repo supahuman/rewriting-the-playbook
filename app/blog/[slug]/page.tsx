@@ -1,6 +1,6 @@
-import { supabase } from "@/lib/supabaseClient";
-import { Post } from "@/types/post";
-import PostContent from "@/components/blog/PostContent";
+import { supabaseServer } from '@/lib/supabaseServerClient';
+import { Post } from '@/types/post';
+import PostContent from '@/components/blog/PostContent';
 
 interface Props {
   params: { slug: string };
@@ -9,22 +9,29 @@ interface Props {
 export default async function PostPage({ params }: Props) {
   const { slug } = params;
 
-  const { data: post, error } = await supabase
-    .from("posts")
-    .select("title, content, created_at")
-    .eq("slug", slug)
+  const { data: post, error } = await supabaseServer
+    .from('posts')
+    .select('title, content, created_at')
+    .eq('slug', slug)
     .single();
 
-  if (error) {
-    return <div>Error loading post: {error.message}</div>;
+  if (error || !post) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-12">
+        Error loading post: {error?.message ?? 'Not found'}
+      </div>
+    );
   }
 
-  // Ensure the fetched data matches the Post type
-  const postData: Pick<Post, "title" | "content" | "created_at"> = {
+  const postData: Pick<Post, 'title' | 'content' | 'created_at'> = {
     title: post.title,
     content: post.content,
     created_at: post.created_at,
   };
 
-  return <PostContent {...postData} />;
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      <PostContent {...postData} />
+    </div>
+  );
 }
