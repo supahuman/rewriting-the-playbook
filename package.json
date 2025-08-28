@@ -2,6 +2,7 @@
   "name": "rewriting-the-playbook",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -9,6 +10,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
+    "insert-mock": "node --loader ts-node/esm scripts/insertMockData.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -23,9 +25,11 @@
     "@types/node": "^20",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

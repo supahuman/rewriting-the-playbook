@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Post } from "@/types/post";
+import Link from 'next/link';
+import { Post } from '@/types/post';
 
 export default function BlogPostCard({
   id,
@@ -12,12 +12,12 @@ export default function BlogPostCard({
 }: Post) {
   return (
     <li key={id}>
-      <Link href={`/blog/${slug}`}>
-        <a>
-          <h2>{title}</h2>
-          <p>{summary}</p>
-          <small>{new Date(created_at).toLocaleDateString()}</small>
-        </a>
+      <Link href={`/blog/${slug}`} className="block">
+        <h2>{title}</h2>
+        <p>{summary}</p>
+        <small>
+          {created_at ? new Date(created_at).toLocaleDateString() : ''}
+        </small>
       </Link>
     </li>
   );
