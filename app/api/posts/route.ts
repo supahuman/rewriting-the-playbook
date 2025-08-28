@@ -1,16 +1,6 @@
 import { supabase } from "@/lib/supabaseClient";
 import { NextResponse } from "next/server";
-
-// Define the Post type
-export interface Post {
-  id: string;
-  slug: string;
-  title: string;
-  summary?: string;
-  content: string;
-  published: boolean;
-  created_at: string; // ISO date string
-}
+import { Post } from "@/types/post";
 
 // GET handler for fetching posts
 export async function GET() {
